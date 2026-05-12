@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh api *)",
+      "Bash(curl -s https://raw.githubusercontent.com/muriloalvesdev/claude-code-cheatsheet/main/REFERENCE.md)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "Bash(chmod +x *)"
+    ]
+  }
+}
