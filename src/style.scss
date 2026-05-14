@@ -1,0 +1,93 @@
+@use './assets/scss/variables' as *;
+@use './assets/scss/reset';
+
+// ─────────────────────────────────────────────
+// Custom properties globais (runtime)
+// ─────────────────────────────────────────────
+:root {
+  --color-navy:       #{$color-navy};
+  --color-navy-mid:   #{$color-navy-mid};
+  --color-navy-light: #{$color-navy-light};
+  --color-navy-dark:  #{$color-navy-dark};
+  --color-red:        #{$color-red};
+  --color-red-dark:   #{$color-red-dark};
+  --color-white:      #{$color-white};
+  --color-gray-100:   #{$color-gray-100};
+  --color-gray-200:   #{$color-gray-200};
+  --color-gray-600:   #{$color-gray-600};
+  --color-gray-800:   #{$color-gray-800};
+  --font-sans:        #{$font-sans};
+  --container-max:    #{$container-max};
+  --transition-base:  #{$transition-base};
+}
+
+// ─────────────────────────────────────────────
+// Layout global
+// ─────────────────────────────────────────────
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+
+main {
+  flex: 1;
+}
+
+// ─────────────────────────────────────────────
+// Utilitários de seção
+// ─────────────────────────────────────────────
+.section-header {
+  text-align: center;
+  margin-bottom: $space-6;
+
+  h2 {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $color-navy;
+    margin-bottom: $space-1;
+
+    @media (min-width: $bp-lg) {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  p {
+    font-size: $font-size-md;
+    color: $color-gray-600;
+    max-width: 540px;
+    margin-inline: auto;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $space-3;
+
+  @media (min-width: $bp-md) {
+    padding-inline: $space-6;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Skip link de acessibilidade
+// ─────────────────────────────────────────────
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: $space-2;
+  z-index: 9999;
+  padding: 12px 20px;
+  background: $color-navy;
+  color: $color-white;
+  border-radius: 0 0 $radius-sm $radius-sm;
+  font-weight: 600;
+  font-size: $font-size-sm;
+  transition: top $transition-fast;
+
+  &:focus {
+    top: 0;
+  }
+}

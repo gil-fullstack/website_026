@@ -1,0 +1,200 @@
+@use 'variables' as *;
+
+// ─────────────────────────────────────────────
+// Responsividade
+// ─────────────────────────────────────────────
+@mixin respond-to($bp) {
+  @if $bp == 'sm'  { @media (min-width: $bp-sm)  { @content; } }
+  @else if $bp == 'md'  { @media (min-width: $bp-md)  { @content; } }
+  @else if $bp == 'lg'  { @media (min-width: $bp-lg)  { @content; } }
+  @else if $bp == 'xl'  { @media (min-width: $bp-xl)  { @content; } }
+  @else if $bp == '2xl' { @media (min-width: $bp-2xl) { @content; } }
+  @else { @media (min-width: $bp) { @content; } }
+}
+
+// ─────────────────────────────────────────────
+// Layout
+// ─────────────────────────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin container {
+  width: 100%;
+  max-width: $container-max;
+  margin-inline: auto;
+  padding-inline: $container-padding-sm;
+
+  @include respond-to('md') {
+    padding-inline: $container-padding;
+  }
+}
+
+@mixin section-padding {
+  padding-block: $space-6;
+
+  @include respond-to('md') {
+    padding-block: $space-8;
+  }
+
+  @include respond-to('lg') {
+    padding-block: $space-10;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Tipografia
+// ─────────────────────────────────────────────
+@mixin heading-xl {
+  font-size: $font-size-3xl;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+
+  @include respond-to('lg') {
+    font-size: $font-size-5xl;
+  }
+}
+
+@mixin heading-lg {
+  font-size: $font-size-2xl;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+
+  @include respond-to('lg') {
+    font-size: $font-size-3xl;
+  }
+}
+
+@mixin heading-md {
+  font-size: $font-size-xl;
+  font-weight: 600;
+  line-height: 1.3;
+
+  @include respond-to('lg') {
+    font-size: $font-size-2xl;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Botões base
+// ─────────────────────────────────────────────
+@mixin btn-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-1;
+  padding: 14px 28px;
+  border-radius: $radius-sm;
+  font-family: $font-sans;
+  font-size: $font-size-base;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all $transition-base;
+  white-space: nowrap;
+
+  &:focus-visible {
+    outline: 3px solid rgba($color-navy-mid, 0.5);
+    outline-offset: 2px;
+  }
+}
+
+@mixin btn-primary {
+  @include btn-base;
+  background-color: $color-red;
+  color: $color-white;
+  border-color: $color-red;
+
+  &:hover {
+    background-color: $color-red-dark;
+    border-color: $color-red-dark;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($color-red, 0.35);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+@mixin btn-outline-white {
+  @include btn-base;
+  background-color: transparent;
+  color: $color-white;
+  border-color: rgba($color-white, 0.7);
+
+  &:hover {
+    background-color: $color-white;
+    color: $color-navy;
+    border-color: $color-white;
+  }
+}
+
+@mixin btn-outline-navy {
+  @include btn-base;
+  background-color: transparent;
+  color: $color-navy;
+  border-color: $color-navy;
+
+  &:hover {
+    background-color: $color-navy;
+    color: $color-white;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Acessibilidade
+// ─────────────────────────────────────────────
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin focus-ring($color: $color-navy-mid) {
+  &:focus-visible {
+    outline: 3px solid rgba($color, 0.5);
+    outline-offset: 2px;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Cards
+// ─────────────────────────────────────────────
+@mixin card-base {
+  background: $color-white;
+  border-radius: $radius-md;
+  border: 1px solid $color-gray-200;
+  padding: $space-4 $space-3;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-card-hover;
+    border-color: $color-navy-mid;
+  }
+}
