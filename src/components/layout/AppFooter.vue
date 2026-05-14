@@ -1,11 +1,12 @@
 <script setup>
+import ciafLogo from '@/assets/ciaf560.png'
 const currentYear = new Date().getFullYear()
 
 const columns = [
   {
     title: 'Soluções',
     links: [
-      { label: 'CIAF Professional', href: '#' },
+      { label: 'CIAF Professional', href: '/solucoes/ciaf-professional' },
       { label: 'CIAF Emissor', href: '#' },
       { label: 'CIAF Automotivo', href: '#' },
       { label: 'Petsystem', href: '#' },
@@ -41,9 +42,8 @@ const columns = [
     <div class="container footer__inner">
 
       <div class="footer__brand">
-        <a href="/" class="footer__logo" aria-label="CIAF Sistemas — Página inicial">
-          <span class="footer__logo-text">CIAF</span>
-          <span class="footer__logo-sub">sistemas</span>
+        <a href="/" class="footer__logo" aria-label="CIAF Soluções em Software — Página inicial">
+          <img :src="ciafLogo" alt="CIAF Soluções em Software" class="footer__logo-img" />
         </a>
         <p class="footer__tagline">Soluções completas para seu negócio!</p>
         <address class="footer__contact">
@@ -71,7 +71,12 @@ const columns = [
         <h3 class="footer__col-title">{{ col.title }}</h3>
         <ul role="list" class="footer__col-list">
           <li v-for="link in col.links" :key="link.label">
-            <a :href="link.href" class="footer__col-link">{{ link.label }}</a>
+            <RouterLink
+              v-if="link.href.startsWith('/')"
+              :to="link.href"
+              class="footer__col-link"
+            >{{ link.label }}</RouterLink>
+            <a v-else :href="link.href" class="footer__col-link">{{ link.label }}</a>
           </li>
         </ul>
       </nav>
@@ -121,27 +126,25 @@ const columns = [
   }
 
   &__logo {
-    @include flex-start;
-    gap: 6px;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
     width: fit-content;
+    background-color: $color-white;
+    border-radius: $radius-sm;
+    padding: 6px 12px;
+    transition: opacity $transition-fast;
 
-    &-text {
-      font-size: 28px;
-      font-weight: 800;
-      color: $color-white;
-      letter-spacing: 2px;
-      line-height: 1;
+    &:hover {
+      opacity: 0.9;
     }
 
-    &-sub {
-      font-size: 11px;
-      font-weight: 400;
-      color: rgba($color-white, 0.5);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      align-self: flex-end;
-      margin-bottom: 2px;
+    @include focus-ring;
+
+    &-img {
+      display: block;
+      height: 44px;
+      width: auto;
     }
   }
 

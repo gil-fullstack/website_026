@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import ciafLogo from '@/assets/ciaf560.png'
 
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
@@ -35,9 +36,8 @@ const navLinks = [
     <a href="#main-content" class="skip-link">Ir para o conteúdo</a>
 
     <div class="container header__inner">
-      <a href="/" class="logo" aria-label="CIAF Sistemas — Página inicial" @click="closeMenu">
-        <span class="logo__text">CIAF</span>
-        <span class="logo__sub">sistemas</span>
+      <a href="/" class="logo" aria-label="CIAF Soluções em Software — Página inicial" @click="closeMenu">
+        <img :src="ciafLogo" alt="CIAF Soluções em Software" class="logo__img" />
       </a>
 
       <nav
@@ -93,52 +93,48 @@ const navLinks = [
 
   &__inner {
     @include flex-between;
-    height: 70px;
+    align-items: center;
+    padding-block: $space-1;
     gap: $space-3;
+    min-height: 70px;
   }
 
   &__actions {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: $space-2;
-    flex-shrink: 0;
   }
 }
 
 // ── Logo ──────────────────────────────────────
 .logo {
-  @include flex-start;
-  gap: 6px;
+  width: 10%;
+  height: 50%;
+  display: inline-flex;
+  align-items: center;
   flex-shrink: 0;
   text-decoration: none;
+  background-color: $color-white-opacity;
+  border-radius: $radius-sm;
+  padding: 7px 14px;
+  transition: opacity $transition-fast;
 
-  &__text {
-    font-size: 26px;
-    font-weight: 800;
-    color: $color-white;
-    letter-spacing: 2px;
-    line-height: 1;
+  &:hover {
+    opacity: 0.92;
   }
 
-  &__sub {
-    font-size: 11px;
-    font-weight: 400;
-    color: rgba($color-white, 0.65);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    align-self: flex-end;
-    margin-bottom: 2px;
+  @include focus-ring;
+
+  &__img {
+    display: block;
+    height: 35px;
+    width: auto;
   }
 }
 
 // ── Nav ──────────────────────────────────────
 .nav {
-  &__list {
-    display: flex;
-    align-items: center;
-    gap: $space-1;
-  }
-
   &__link {
     display: block;
     padding: 6px 10px;
@@ -156,6 +152,23 @@ const navLinks = [
     }
 
     @include focus-ring($color-navy-mid);
+  }
+}
+
+// Layout coluna (desktop) — links acima, botões abaixo
+@include respond-to('lg') {
+  .nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+
+    &__list {
+      display: flex;
+      align-items: center;
+      gap: $space-1;
+    }
   }
 }
 
@@ -235,6 +248,7 @@ const navLinks = [
     }
 
     &__list {
+      display: flex;
       flex-direction: column;
       align-items: flex-start;
       padding: $space-2 $space-3;

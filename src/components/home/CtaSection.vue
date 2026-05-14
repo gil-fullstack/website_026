@@ -1,4 +1,12 @@
 <script setup>
+defineProps({
+  eyebrow:  { type: String, default: 'Comece agora' },
+  title:    { type: String, default: 'Pronto para transformar\na gestão da sua empresa?' },
+  subtitle: { type: String, default: 'Fale com um consultor e descubra qual solução CIAF é ideal para o seu negócio. Atendimento personalizado sem compromisso.' },
+  ctaLabel: { type: String, default: 'Ver soluções' },
+  ctaTo:    { type: String, default: '#solucoes' }
+})
+
 const whatsappNumber = '5535984698908'
 const whatsappMessage = encodeURIComponent('Olá! Gostaria de conhecer as soluções da CIAF para minha empresa.')
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
@@ -12,18 +20,15 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
       <div class="cta-section__content">
         <span class="cta-section__eyebrow">
           <i class="mdi mdi-rocket-launch-outline" aria-hidden="true" />
-          Comece agora
+          {{ eyebrow }}
         </span>
 
         <h2 id="cta-heading" class="cta-section__title">
-          Pronto para transformar<br>
-          a gestão da sua empresa?
+          {{ title.split('\n')[0] }}<br v-if="title.includes('\n')" />
+          {{ title.split('\n')[1] || '' }}
         </h2>
 
-        <p class="cta-section__subtitle">
-          Fale com um consultor e descubra qual solução CIAF é ideal para o seu negócio.
-          Atendimento personalizado sem compromisso.
-        </p>
+        <p class="cta-section__subtitle">{{ subtitle }}</p>
 
         <div class="cta-section__actions">
           <a
@@ -35,9 +40,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
             <i class="mdi mdi-whatsapp" aria-hidden="true" />
             WhatsApp Comercial
           </a>
-          <a href="#solucoes" class="btn btn--outline-white">
+          <a :href="ctaTo" class="btn btn--outline-white">
             <i class="mdi mdi-eye-outline" aria-hidden="true" />
-            Ver soluções
+            {{ ctaLabel }}
           </a>
         </div>
 

@@ -1,13 +1,13 @@
 <script setup>
+import heroBg from '@/assets/images/foguete.jpg'
 </script>
 
 <template>
-  <section class="hero" aria-label="Apresentação principal">
-    <div class="hero__bg-shapes" aria-hidden="true">
-      <span class="shape shape--1" />
-      <span class="shape shape--2" />
-      <span class="shape shape--3" />
-    </div>
+  <section
+    class="hero"
+    :style="{ backgroundImage: `url(${heroBg})` }"
+    aria-label="Apresentação principal"
+  >
 
     <div class="container hero__inner">
       <div class="hero__content">
@@ -111,18 +111,36 @@
 <style lang="scss" scoped>
 .hero {
   position: relative;
-  background: linear-gradient(135deg, $color-navy-dark 0%, $color-navy 55%, $color-navy-mid 100%);
+  background-color: $color-navy-dark;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
   min-height: calc(100svh - 70px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 
-  // ── Formas decorativas ────────────────────────
-  &__bg-shapes {
+  // Overlay gradiente direcional: opaco no lado esquerdo (texto), transparente à direita (imagem visível)
+  &::before {
+    content: '';
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    overflow: hidden;
+    background: linear-gradient(
+      105deg,
+      rgba($color-navy-dark, 0.95) 0%,
+      rgba($color-navy, 0.85)      40%,
+      rgba($color-navy, 0.60)      65%,
+      rgba($color-navy-dark, 0.35) 100%
+    );
+    z-index: 0;
+
+    @media (max-width: #{$bp-lg - 1px}) {
+      background: linear-gradient(
+        to bottom,
+        rgba($color-navy-dark, 0.88) 0%,
+        rgba($color-navy, 0.82)      100%
+      );
+    }
   }
 
   &__inner {
@@ -378,35 +396,6 @@
   }
 }
 
-// ── Formas decorativas ────────────────────────
-.shape {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.05;
-  background: $color-white;
-
-  &--1 {
-    width: 600px;
-    height: 600px;
-    top: -200px;
-    right: -150px;
-  }
-
-  &--2 {
-    width: 300px;
-    height: 300px;
-    bottom: -100px;
-    left: -80px;
-  }
-
-  &--3 {
-    width: 150px;
-    height: 150px;
-    top: 30%;
-    right: 25%;
-    opacity: 0.03;
-  }
-}
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }

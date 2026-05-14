@@ -6,6 +6,18 @@ const routes = [
     name: 'home',
     component: () => import('../views/HomeView.vue'),
     meta: { title: 'CIAF Sistemas — Soluções ERP e Automação' }
+  },
+  {
+    path: '/solucoes/ciaf-professional',
+    name: 'ciaf-professional',
+    component: () => import('../views/solucoes/CiafProfessionalView.vue'),
+    meta: { title: 'CIAF Professional — ERP Desktop para Gestão Empresarial | CIAF Sistemas' }
+  },
+  {
+    path: '/solucoes/ciaf-professional/:slug',
+    name: 'ciaf-professional-detail',
+    component: () => import('../views/solucoes/CiafProfessionalDetailView.vue'),
+    meta: { title: 'CIAF Professional' }
   }
 ]
 
