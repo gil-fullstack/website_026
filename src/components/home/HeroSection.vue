@@ -23,7 +23,7 @@ import heroBg from '@/assets/images/foguete.jpg'
 
         <p class="hero__subtitle">
           Software ERP, automação e gestão empresarial com
-          <strong>suporte gratuito 24h</strong>. Tecnologia que cresce junto com a sua empresa.
+          <strong>suporte gratuito das 8 às 18hs</strong>. Tecnologia que cresce junto com a sua empresa.
         </p>
 
         <div class="hero__actions">
@@ -49,7 +49,7 @@ import heroBg from '@/assets/images/foguete.jpg'
           </div>
           <div class="trust-item">
             <i class="mdi mdi-clock-check-outline" aria-hidden="true" />
-            <span>Help Desk 24h</span>
+            <span>Help Desk das 8 às 18hs</span>
           </div>
           <div class="trust-item">
             <i class="mdi mdi-account-group-outline" aria-hidden="true" />
@@ -81,7 +81,7 @@ import heroBg from '@/assets/images/foguete.jpg'
               </div>
             </div>
             <div class="visual__stat">
-              <span class="visual__stat-number">24h</span>
+              <span class="visual__stat-number">Das 8 às 18hs</span>
               <span class="visual__stat-label">Suporte disponível</span>
               <div class="visual__bar">
                 <div class="visual__bar-fill" style="width: 100%" />

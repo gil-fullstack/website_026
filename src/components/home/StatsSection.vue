@@ -5,7 +5,7 @@ const stats = [
   { id: 1, value: 5000, suffix: '+', label: 'Clientes ativos', icon: 'mdi-account-group-outline' },
   { id: 2, value: 20,   suffix: '+', label: 'Anos de mercado', icon: 'mdi-calendar-check-outline' },
   { id: 3, value: 6,    suffix: '',  label: 'Soluções disponíveis', icon: 'mdi-apps' },
-  { id: 4, value: 24,   suffix: 'h', label: 'Suporte disponível', icon: 'mdi-headset' }
+  { id: 4, value: 216,   suffix: 'h', label: 'Suporte disponível Mensal', icon: 'mdi-headset' }
 ]
 
 const displayed = ref(stats.map(() => 0))

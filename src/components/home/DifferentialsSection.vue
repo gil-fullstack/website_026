@@ -10,7 +10,7 @@ const differentials = [
   {
     id: 2,
     icon: 'mdi-clock-check-outline',
-    title: 'Atendimento 24h',
+    title: 'Atendimento das 8 às 18hs',
     description: 'Help Desk disponível 24 horas por dia via portal online. Seus problemas resolvidos a qualquer hora.',
     accentColor: '#0c325e'
   },
