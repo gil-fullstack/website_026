@@ -1,62 +1,112 @@
 <script setup>
-import heroBg from '@/assets/images/foguete.jpg'
+import { ref, onMounted, onUnmounted } from 'vue'
+import foguete from '@/assets/images/foguete.jpg'
+import empresario from '@/assets/images/empresario.jpg'
+
+const slides = [
+  {
+    bg: foguete,
+    title: 'Soluções completas',
+    titleHighlight: 'para o seu negócio',
+    subtitle: 'Software ERP, automação e gestão empresarial com <strong>suporte gratuito das 8 às 18hs</strong>. Tecnologia que cresce junto com a sua empresa.',
+  },
+  {
+    bg: empresario,
+    title: 'ERP Ciaf online',
+    titleHighlight: 'liberdade para acessar',
+    subtitle: 'Todo o poder do nosso ERP acessível de qualquer lugar, sem instalação e sem servidor próprio. Seu negócio na palma da mão.',
+  },
+]
+
+const current = ref(0)
+let timer = null
+
+function goTo(index) {
+  current.value = index
+  restartTimer()
+}
+
+function next() {
+  current.value = (current.value + 1) % slides.length
+}
+
+function startTimer() {
+  timer = setInterval(next, 7000)
+}
+
+function stopTimer() {
+  clearInterval(timer)
+  timer = null
+}
+
+function restartTimer() {
+  stopTimer()
+  startTimer()
+}
+
+onMounted(startTimer)
+onUnmounted(stopTimer)
 </script>
 
 <template>
-  <section
-    class="hero"
-    :style="{ backgroundImage: `url(${heroBg})` }"
-    aria-label="Apresentação principal"
-  >
+  <section class="hero" aria-label="Apresentação principal">
+
+    <div
+      v-for="(slide, i) in slides"
+      :key="i"
+      class="hero__bg"
+      :style="{ backgroundImage: `url(${slide.bg})` }"
+      :class="{ 'hero__bg--active': i === current }"
+      aria-hidden="true"
+    />
 
     <div class="container hero__inner">
-      <div class="hero__content">
-        <span class="hero__badge">
-          <i class="mdi mdi-check-circle" aria-hidden="true" />
-          Mais de 20 anos de mercado
-        </span>
+      <Transition name="hero-fade" mode="out-in">
+        <div :key="current" class="hero__content">
+          <span class="hero__badge">
+            <i class="mdi mdi-check-circle" aria-hidden="true" />
+            Mais de 20 anos de mercado
+          </span>
 
-        <h1 class="hero__title">
-          Soluções completas<br>
-          <span class="hero__title--highlight">para o seu negócio</span>
-        </h1>
+          <h1 class="hero__title">
+            {{ slides[current].title }}<br>
+            <span class="hero__title--highlight">{{ slides[current].titleHighlight }}</span>
+          </h1>
 
-        <p class="hero__subtitle">
-          Software ERP, automação e gestão empresarial com
-          <strong>suporte gratuito das 8 às 18hs</strong>. Tecnologia que cresce junto com a sua empresa.
-        </p>
+          <p class="hero__subtitle" v-html="slides[current].subtitle" />
 
-        <div class="hero__actions">
-          <a href="#solucoes" class="btn btn--primary">
-            <i class="mdi mdi-rocket-launch-outline" aria-hidden="true" />
-            Conheça nossas soluções
-          </a>
-          <a
-            href="https://wa.me/5535984698908"
-            class="btn btn--outline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i class="mdi mdi-whatsapp" aria-hidden="true" />
-            Falar no WhatsApp
-          </a>
+          <div class="hero__actions">
+            <a href="#solucoes" class="btn btn--primary">
+              <i class="mdi mdi-rocket-launch-outline" aria-hidden="true" />
+              Conheça nossas soluções
+            </a>
+            <a
+              href="https://wa.me/5535984698908"
+              class="btn btn--outline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="mdi mdi-whatsapp" aria-hidden="true" />
+              Falar no WhatsApp
+            </a>
+          </div>
+
+          <div class="hero__trust" aria-label="Indicadores de confiança">
+            <div class="trust-item">
+              <i class="mdi mdi-shield-check-outline" aria-hidden="true" />
+              <span>Suporte gratuito</span>
+            </div>
+            <div class="trust-item">
+              <i class="mdi mdi-clock-check-outline" aria-hidden="true" />
+              <span>Help Desk das 8 às 18hs</span>
+            </div>
+            <div class="trust-item">
+              <i class="mdi mdi-account-group-outline" aria-hidden="true" />
+              <span>+5.000 clientes</span>
+            </div>
+          </div>
         </div>
-
-        <div class="hero__trust" aria-label="Indicadores de confiança">
-          <div class="trust-item">
-            <i class="mdi mdi-shield-check-outline" aria-hidden="true" />
-            <span>Suporte gratuito</span>
-          </div>
-          <div class="trust-item">
-            <i class="mdi mdi-clock-check-outline" aria-hidden="true" />
-            <span>Help Desk das 8 às 18hs</span>
-          </div>
-          <div class="trust-item">
-            <i class="mdi mdi-account-group-outline" aria-hidden="true" />
-            <span>+5.000 clientes</span>
-          </div>
-        </div>
-      </div>
+      </Transition>
 
       <div class="hero__visual" aria-hidden="true">
         <div class="visual__card visual__card--main">
@@ -102,6 +152,19 @@ import heroBg from '@/assets/images/foguete.jpg'
       </div>
     </div>
 
+    <div class="hero__dots" role="tablist" aria-label="Navegar entre slides">
+      <button
+        v-for="(slide, i) in slides"
+        :key="i"
+        class="hero__dot"
+        :class="{ 'hero__dot--active': i === current }"
+        @click="goTo(i)"
+        :aria-label="`Ir para slide ${i + 1}`"
+        :aria-selected="i === current"
+        role="tab"
+      />
+    </div>
+
     <a href="#solucoes" class="hero__scroll-cta" aria-label="Ver soluções">
       <i class="mdi mdi-chevron-down hero__scroll-icon" aria-hidden="true" />
     </a>
@@ -112,15 +175,11 @@ import heroBg from '@/assets/images/foguete.jpg'
 .hero {
   position: relative;
   background-color: $color-navy-dark;
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
   min-height: calc(100svh - 70px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
 
-  // Overlay gradiente direcional: opaco no lado esquerdo (texto), transparente à direita (imagem visível)
   &::before {
     content: '';
     position: absolute;
@@ -132,7 +191,7 @@ import heroBg from '@/assets/images/foguete.jpg'
       rgba($color-navy, 0.60)      65%,
       rgba($color-navy-dark, 0.35) 100%
     );
-    z-index: 0;
+    z-index: 1;
 
     @media (max-width: #{$bp-lg - 1px}) {
       background: linear-gradient(
@@ -143,6 +202,25 @@ import heroBg from '@/assets/images/foguete.jpg'
     }
   }
 
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    z-index: 0;
+
+    &--active {
+      opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
   &__inner {
     display: flex;
     align-items: center;
@@ -150,7 +228,7 @@ import heroBg from '@/assets/images/foguete.jpg'
     padding-block: $space-10;
     flex: 1;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 
     @include respond-to('lg') {
       display: grid;
@@ -202,7 +280,7 @@ import heroBg from '@/assets/images/foguete.jpg'
     line-height: 1.65;
     max-width: 520px;
 
-    strong {
+    :deep(strong) {
       color: $color-white;
       font-weight: 600;
     }
@@ -222,6 +300,41 @@ import heroBg from '@/assets/images/foguete.jpg'
     margin-top: $space-1;
   }
 
+  // ── Dots de navegação ─────────────────────────
+  &__dots {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    margin-bottom: $space-2;
+  }
+
+  &__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: $radius-full;
+    background: rgba($color-white, 0.35);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, width 0.3s ease;
+
+    &--active {
+      background: $color-white;
+      width: 24px;
+      border-radius: 4px;
+    }
+
+    &:hover:not(.hero__dot--active) {
+      background: rgba($color-white, 0.65);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
   &__scroll-cta {
     @include flex-center;
     width: 44px;
@@ -232,7 +345,7 @@ import heroBg from '@/assets/images/foguete.jpg'
     text-decoration: none;
     transition: color $transition-base;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 
     &:hover {
       color: $color-white;
@@ -396,6 +509,36 @@ import heroBg from '@/assets/images/foguete.jpg'
   }
 }
 
+// ── Transição do conteúdo texto ───────────────
+.hero-fade-enter-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hero-fade-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.hero-fade-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.hero-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-fade-enter-active,
+  .hero-fade-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .hero-fade-enter-from,
+  .hero-fade-leave-to {
+    transform: none;
+  }
+}
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }

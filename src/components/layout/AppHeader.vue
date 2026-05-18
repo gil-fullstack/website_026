@@ -25,7 +25,7 @@ const navLinks = [
   { label: 'Comprar', href: '#comprar' },
   { label: 'Downloads', href: '#downloads' },
   { label: 'Sobre', href: '#sobre' },
-  { label: 'Notícias', href: '#noticias' },
+  // { label: 'Notícias', href: '#noticias' },
   { label: 'Suporte', href: '#suporte' },
   { label: 'Contato', href: '#contato' },
 ]
