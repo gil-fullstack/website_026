@@ -60,86 +60,7 @@ const featuredHighlights = [
         <h2 id="solutions-heading">Nossas Soluções</h2>
         <p>Software desenvolvido para cada tipo de negócio, com suporte especializado incluído.</p>
       </header>
-      <h2 style="margin-top: 2.5%; text-align: center; color: #0c325e">Solução Online:</h2>
-      <!-- ── Destaque: ERP CIAF Online ──────────────── -->
-      <a
-        href="https://ciafonline.com.br/"
-        class="featured-product"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Conheça o novo ERP CIAF Online — clique para acessar o site"
-      >
-        <div class="featured-product__glow" aria-hidden="true" />
 
-        <div class="featured-product__content">
-          <div class="featured-product__text">
-            <div class="featured-product__badges">
-              <span class="badge badge--new">
-                <i class="mdi mdi-star-four-points" aria-hidden="true" />
-                Novidade
-              </span>
-              <span class="badge badge--cloud">
-                <i class="mdi mdi-cloud-outline" aria-hidden="true" />
-                100% Cloud
-              </span>
-            </div>
-
-            <h3 class="featured-product__title">
-              ERP CIAF Online
-              <span class="featured-product__title-accent">— gestão na nuvem</span>
-            </h3>
-
-            <p class="featured-product__desc">
-              O mais novo produto da CIAF: todo o poder do nosso ERP acessível de qualquer lugar,
-              sem instalação e sem servidor próprio. Seu negócio na palma da mão.
-            </p>
-
-            <ul class="featured-product__highlights" role="list">
-              <li
-                v-for="item in featuredHighlights"
-                :key="item.text"
-                class="featured-product__highlight-item"
-              >
-                <i :class="['mdi', item.icon]" aria-hidden="true" />
-                <span>{{ item.text }}</span>
-              </li>
-            </ul>
-
-            <span class="featured-product__cta" aria-hidden="true">
-              Conheça o ERP CIAF Online
-              <i class="mdi mdi-arrow-right" />
-            </span>
-          </div>
-
-          <div class="featured-product__visual" aria-hidden="true">
-            <div class="fp-visual__orbit fp-visual__orbit--outer">
-              <span class="fp-visual__planet fp-visual__planet--1">
-                <i class="mdi mdi-chart-line" />
-              </span>
-              <span class="fp-visual__planet fp-visual__planet--2">
-                <i class="mdi mdi-package-variant-closed" />
-              </span>
-              <span class="fp-visual__planet fp-visual__planet--3">
-                <i class="mdi mdi-account-group-outline" />
-              </span>
-              <span class="fp-visual__planet fp-visual__planet--4">
-                <i class="mdi mdi-cash-register" />
-              </span>
-            </div>
-            <div class="fp-visual__orbit fp-visual__orbit--inner">
-              <span class="fp-visual__planet fp-visual__planet--5">
-                <i class="mdi mdi-barcode-scan" />
-              </span>
-              <span class="fp-visual__planet fp-visual__planet--6">
-                <i class="mdi mdi-file-chart-outline" />
-              </span>
-            </div>
-            <div class="fp-visual__core">
-              <i class="mdi mdi-cloud-sync-outline" />
-            </div>
-          </div>
-        </div>
-      </a>
       <h2 style="margin-top: 2.5%; text-align: center; color: #0c325e">Soluções Desktop:</h2>
       <!-- ── Grid dos outros produtos ───────────────── -->
       <div class="solutions__grid" role="list">
@@ -172,12 +93,101 @@ const featuredHighlights = [
         </article>
       </div>
 
+      <h2 style="margin-top: 1.4%; text-align: center; color: #0c325e">Solução Online:</h2>
+      <!-- ── Destaque: ERP CIAF Online ──────────────── -->
+<!--      <div-->
+<!--          class="featured-product"-->
+<!--          target="_blank"-->
+<!--          rel="noopener noreferrer"-->
+<!--          aria-label="Conheça o novo ERP CIAF Online — clique para acessar o site"-->
+<!--      >-->
+<!--        <div class="featured-product__glow" aria-hidden="true" />-->
+
+<!--        <div class="featured-product__content">-->
+<!--          <div class="featured-product__text">-->
+<!--            <div class="featured-product__badges">-->
+<!--              <span class="badge badge&#45;&#45;new">-->
+<!--                <i class="mdi mdi-star-four-points" aria-hidden="true" />-->
+<!--                Novidade-->
+<!--              </span>-->
+<!--              <span class="badge badge&#45;&#45;cloud">-->
+<!--                <i class="mdi mdi-cloud-outline" aria-hidden="true" />-->
+<!--                100% Cloud-->
+<!--              </span>-->
+<!--            </div>-->
+
+<!--            <h3 class="featured-product__title">-->
+<!--              ERP CIAF Online-->
+<!--              <span class="featured-product__title-accent">— gestão na nuvem</span>-->
+<!--            </h3>-->
+
+<!--            <p class="featured-product__desc">-->
+<!--              O mais novo produto da CIAF: todo o poder do nosso ERP acessível de qualquer lugar,-->
+<!--              sem instalação e sem servidor próprio. Seu negócio na palma da mão.-->
+<!--            </p>-->
+
+<!--            <ul class="featured-product__highlights" role="list">-->
+<!--              <li-->
+<!--                  v-for="item in featuredHighlights"-->
+<!--                  :key="item.text"-->
+<!--                  class="featured-product__highlight-item"-->
+<!--              >-->
+<!--                <i :class="['mdi', item.icon]" aria-hidden="true" />-->
+<!--                <span>{{ item.text }}</span>-->
+<!--              </li>-->
+<!--            </ul>-->
+
+<!--            <span class="featured-product__cta" aria-hidden="true">-->
+<!--              Conheça o ERP CIAF Online-->
+<!--              <i class="mdi mdi-arrow-right" />-->
+<!--            </span>-->
+<!--          </div>-->
+
+<!--          <div class="featured-product__visual" aria-hidden="true">-->
+<!--            <div class="fp-visual__orbit fp-visual__orbit&#45;&#45;outer">-->
+<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;1">-->
+<!--                <i class="mdi mdi-chart-line" />-->
+<!--              </span>-->
+<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;2">-->
+<!--                <i class="mdi mdi-package-variant-closed" />-->
+<!--              </span>-->
+<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;3">-->
+<!--                <i class="mdi mdi-account-group-outline" />-->
+<!--              </span>-->
+<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;4">-->
+<!--                <i class="mdi mdi-cash-register" />-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="fp-visual__orbit fp-visual__orbit&#45;&#45;inner">-->
+<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;5">-->
+<!--                <i class="mdi mdi-barcode-scan" />-->
+<!--              </span>-->
+<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;6">-->
+<!--                <i class="mdi mdi-file-chart-outline" />-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="fp-visual__core">-->
+<!--              <i class="mdi mdi-cloud-sync-outline" />-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+    </div>
+    <div class="ciaf_online">
+      <img src="../../assets/images/sistema.jpg">
+      <div class="ciaf_online_right">
+        <h2 style="text-align: center">Ciaf Online</h2>
+        <h3>Faça seu teste gratuitamente e descubra todos os potenciais do ERP online Ciaf Web</h3>
+        <a class="btn btn--primary">Acesse já</a>
+      </div>
     </div>
   </section>
 </template>
 
 <style lang="scss" scoped>
 .solutions {
+  margin-top: -4%;
   background-color: $color-white;
   @include section-padding;
 
@@ -200,35 +210,76 @@ const featuredHighlights = [
 // ─────────────────────────────────────────────
 // Banner destaque — ERP CIAF Online
 // ─────────────────────────────────────────────
+.ciaf_online{
+  width: 100%;
+  background: linear-gradient(135deg, $color-navy-dark 0%, $color-navy 100%);
+  display: flex;
+  padding: 2% 7%;
+  gap: 1.4%;
+  img{
+    width: 70%;
+    height: auto;
+  }
+  .ciaf_online_right{
+    padding: 4% 4%;
+    display: flex;
+    flex-direction: column;
+    background-color: #273d67;
+    border-radius: 10px;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    gap: 7%;
+    width:30%;
+    h2,
+    h3 {
+      color: white;
+    }
+
+    a {
+      @include btn-base;
+      background-color: red;
+      margin-top: 7%;
+      &--outline {
+        background-color: red;
+        color: $color-white;
+        border-color: rgba($color-white, 0.5);
+      }
+        &:hover {
+          background-color: rgba($color-white, 0.1);
+          border-color: $color-white;
+        }
+      color: white;
+    }
+  }
+}
 .featured-product {
   position: relative;
   display: block;
   text-decoration: none;
   border-radius: $radius-lg;
   background: linear-gradient(125deg, $color-navy-dark 0%, $color-navy 45%, $color-navy-mid 100%);
+  //background-color: white;
   border: 1px solid rgba($color-white, 0.08);
   overflow: hidden;
   margin-top: $space-4;
   cursor: pointer;
   transition: transform $transition-base, box-shadow $transition-base;
+  width: 100%;
 
   &:hover {
     transform: translateY(-3px);
     box-shadow: 0 16px 48px rgba($color-navy-dark, 0.4);
-
     .featured-product__cta .mdi {
       transform: translateX(4px);
     }
-
     .fp-visual__orbit--outer {
       animation-duration: 16s;
     }
-
     .fp-visual__orbit--inner {
       animation-duration: 8s;
     }
   }
-
   @include focus-ring($color-navy-mid);
 
   // Reflexo brilhante no topo
