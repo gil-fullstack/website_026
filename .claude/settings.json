@@ -14,7 +14,11 @@
       "Bash(echo *)",
       "Bash(cat *)",
       "Bash(cp *)",
-      "Bash(mv *)"
+      "Bash(mv *)",
+      "Bash(curl *)",
+      "Bash(kill *)",
+      "Bash(pkill *)",
+      "Bash(google-chrome *)"
     ],
     "deny": [
       "Bash(rm -rf *)",

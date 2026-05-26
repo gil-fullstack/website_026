@@ -68,6 +68,15 @@ const differentials = [
 .differentials {
   background-color: $color-gray-100;
   @include section-padding;
+  padding-top: $space-4;
+
+  @include respond-to('md') {
+    padding-top: $space-4;
+  }
+
+  @include respond-to('lg') {
+    padding-top: $space-5;
+  }
 
   &__grid {
     display: grid;

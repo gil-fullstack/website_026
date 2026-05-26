@@ -1,4 +1,30 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const slides = [
+  new URL('../../assets/images/sistema.jpg', import.meta.url).href,
+  new URL('../../assets/images/sistema_2.jpg', import.meta.url).href,
+  new URL('../../assets/images/sistema_3.jpg', import.meta.url).href,
+]
+
+const current = ref(0)
+let timer = null
+
+function goTo(index) {
+  current.value = (index + slides.length) % slides.length
+}
+
+function next() { goTo(current.value + 1) }
+function prev() { goTo(current.value - 1) }
+
+onMounted(() => {
+  timer = setInterval(next, 4000)
+})
+
+onUnmounted(() => {
+  clearInterval(timer)
+})
+
 const products = [
   {
     id: 1,
@@ -94,88 +120,33 @@ const featuredHighlights = [
       </div>
 
       <h2 style="margin-top: 1.4%; text-align: center; color: #0c325e">Solução Online:</h2>
-      <!-- ── Destaque: ERP CIAF Online ──────────────── -->
-<!--      <div-->
-<!--          class="featured-product"-->
-<!--          target="_blank"-->
-<!--          rel="noopener noreferrer"-->
-<!--          aria-label="Conheça o novo ERP CIAF Online — clique para acessar o site"-->
-<!--      >-->
-<!--        <div class="featured-product__glow" aria-hidden="true" />-->
-
-<!--        <div class="featured-product__content">-->
-<!--          <div class="featured-product__text">-->
-<!--            <div class="featured-product__badges">-->
-<!--              <span class="badge badge&#45;&#45;new">-->
-<!--                <i class="mdi mdi-star-four-points" aria-hidden="true" />-->
-<!--                Novidade-->
-<!--              </span>-->
-<!--              <span class="badge badge&#45;&#45;cloud">-->
-<!--                <i class="mdi mdi-cloud-outline" aria-hidden="true" />-->
-<!--                100% Cloud-->
-<!--              </span>-->
-<!--            </div>-->
-
-<!--            <h3 class="featured-product__title">-->
-<!--              ERP CIAF Online-->
-<!--              <span class="featured-product__title-accent">— gestão na nuvem</span>-->
-<!--            </h3>-->
-
-<!--            <p class="featured-product__desc">-->
-<!--              O mais novo produto da CIAF: todo o poder do nosso ERP acessível de qualquer lugar,-->
-<!--              sem instalação e sem servidor próprio. Seu negócio na palma da mão.-->
-<!--            </p>-->
-
-<!--            <ul class="featured-product__highlights" role="list">-->
-<!--              <li-->
-<!--                  v-for="item in featuredHighlights"-->
-<!--                  :key="item.text"-->
-<!--                  class="featured-product__highlight-item"-->
-<!--              >-->
-<!--                <i :class="['mdi', item.icon]" aria-hidden="true" />-->
-<!--                <span>{{ item.text }}</span>-->
-<!--              </li>-->
-<!--            </ul>-->
-
-<!--            <span class="featured-product__cta" aria-hidden="true">-->
-<!--              Conheça o ERP CIAF Online-->
-<!--              <i class="mdi mdi-arrow-right" />-->
-<!--            </span>-->
-<!--          </div>-->
-
-<!--          <div class="featured-product__visual" aria-hidden="true">-->
-<!--            <div class="fp-visual__orbit fp-visual__orbit&#45;&#45;outer">-->
-<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;1">-->
-<!--                <i class="mdi mdi-chart-line" />-->
-<!--              </span>-->
-<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;2">-->
-<!--                <i class="mdi mdi-package-variant-closed" />-->
-<!--              </span>-->
-<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;3">-->
-<!--                <i class="mdi mdi-account-group-outline" />-->
-<!--              </span>-->
-<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;4">-->
-<!--                <i class="mdi mdi-cash-register" />-->
-<!--              </span>-->
-<!--            </div>-->
-<!--            <div class="fp-visual__orbit fp-visual__orbit&#45;&#45;inner">-->
-<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;5">-->
-<!--                <i class="mdi mdi-barcode-scan" />-->
-<!--              </span>-->
-<!--              <span class="fp-visual__planet fp-visual__planet&#45;&#45;6">-->
-<!--                <i class="mdi mdi-file-chart-outline" />-->
-<!--              </span>-->
-<!--            </div>-->
-<!--            <div class="fp-visual__core">-->
-<!--              <i class="mdi mdi-cloud-sync-outline" />-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
 
     </div>
     <div class="ciaf_online">
-      <img src="../../assets/images/sistema.jpg">
+      <div class="carousel" role="region" aria-label="Imagens do sistema CIAF Online">
+        <div class="carousel__track">
+          <img
+            v-for="(src, i) in slides"
+            :key="i"
+            :src="src"
+            :alt="`Tela do sistema CIAF Online — imagem ${i + 1}`"
+            class="carousel__slide"
+            :class="{ 'carousel__slide--active': i === current }"
+          >
+        </div>
+        <button class="carousel__btn carousel__btn--prev" aria-label="Imagem anterior" @click="prev">&#8249;</button>
+        <button class="carousel__btn carousel__btn--next" aria-label="Próxima imagem" @click="next">&#8250;</button>
+        <div class="carousel__dots" role="tablist">
+          <button
+            v-for="(_, i) in slides"
+            :key="i"
+            class="carousel__dot"
+            :class="{ 'carousel__dot--active': i === current }"
+            :aria-label="`Ir para imagem ${i + 1}`"
+            @click="goTo(i)"
+          />
+        </div>
+      </div>
       <div class="ciaf_online_right">
         <h2 style="text-align: center">Ciaf Online</h2>
         <h3>Faça seu teste gratuitamente e descubra todos os potenciais do ERP online Ciaf Web</h3>
@@ -190,6 +161,15 @@ const featuredHighlights = [
   margin-top: -4%;
   background-color: $color-white;
   @include section-padding;
+  padding-bottom: $space-4;
+
+  @include respond-to('md') {
+    padding-bottom: $space-4;
+  }
+
+  @include respond-to('lg') {
+    padding-bottom: $space-5;
+  }
 
   &__grid {
     display: grid;
@@ -210,46 +190,150 @@ const featuredHighlights = [
 // ─────────────────────────────────────────────
 // Banner destaque — ERP CIAF Online
 // ─────────────────────────────────────────────
-.ciaf_online{
+.ciaf_online {
   width: 100%;
   background: linear-gradient(135deg, $color-navy-dark 0%, $color-navy 100%);
   display: flex;
-  padding: 2% 7%;
-  gap: 1.4%;
-  img{
-    width: 70%;
-    height: auto;
+  flex-direction: column;
+  padding: 6% 5%;
+  gap: 24px;
+
+  @include respond-to('md') {
+    flex-direction: row;
+    align-items: stretch;
+    padding: 2% 7%;
+    gap: 1.4%;
   }
-  .ciaf_online_right{
-    padding: 4% 4%;
+}
+
+// ── Carrossel ─────────────────────────────────
+.carousel {
+  position: relative;
+  width: 100%;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-radius: 6px;
+
+  @include respond-to('md') {
+    width: 70%;
+  }
+
+  &__track {
+    display: grid;
+    width: 100%;
+  }
+
+  &__slide {
+    grid-area: 1 / 1;
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  &__btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.35);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+
+    &:hover { background: rgba(0, 0, 0, 0.6); }
+
+    &--prev { left: 10px; }
+    &--next { right: 10px; }
+  }
+
+  &__dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s, transform 0.2s;
+
+    &--active {
+      background: #fff;
+      transform: scale(1.3);
+    }
+  }
+}
+
+.ciaf_online {
+  .ciaf_online_right {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    padding: 28px 24px;
     background-color: #273d67;
     border-radius: 10px;
     color: white;
-    justify-content: center;
-    align-items: center;
-    gap: 7%;
-    width:30%;
+    text-align: center;
+
+    @include respond-to('md') {
+      width: 30%;
+      padding: 4% 4%;
+      gap: 7%;
+    }
+
     h2,
     h3 {
       color: white;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: clamp(1.3rem, 4vw, 1.6rem);
+    }
+
+    h3 {
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      font-weight: 400;
+      line-height: 1.5;
     }
 
     a {
       @include btn-base;
       background-color: red;
-      margin-top: 7%;
-      &--outline {
-        background-color: red;
-        color: $color-white;
-        border-color: rgba($color-white, 0.5);
-      }
-        &:hover {
-          background-color: rgba($color-white, 0.1);
-          border-color: $color-white;
-        }
       color: white;
+      margin-top: 4px;
+
+      &:hover {
+        background-color: rgba($color-white, 0.1);
+        border-color: $color-white;
+      }
     }
   }
 }
