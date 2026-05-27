@@ -31,42 +31,48 @@ const products = [
     name: 'CIAF Professional',
     icon: 'mdi-briefcase-outline',
     description: 'ERP completo para gestão empresarial integrada: financeiro, estoque, vendas e fiscal em um único sistema.',
-    tag: 'Mais popular'
+    tag: 'Mais popular',
+    link: '/solucoes/ciaf-professional'
   },
   {
     id: 2,
     name: 'CIAF Emissor',
     icon: 'mdi-file-document-outline',
     description: 'Emissão ágil de NF-e, NFC-e e demais documentos fiscais com total conformidade tributária.',
-    tag: null
+    tag: null,
+    link: '/solucoes'
   },
   {
     id: 3,
     name: 'CIAF Automotivo',
     icon: 'mdi-car-wrench',
     description: 'Gestão completa para oficinas mecânicas e lojas de autopeças: OS, estoque e controle de serviços.',
-    tag: null
+    tag: null,
+    link: '#comprar'
   },
   {
     id: 4,
     name: 'Petsystem',
     icon: 'mdi-paw',
     description: 'Sistema especializado para pet shops e clínicas veterinárias com agenda, prontuário e vendas.',
-    tag: null
+    tag: null,
+    link: '#comprar'
   },
   {
     id: 5,
     name: 'CIAF Essencial',
     icon: 'mdi-star-circle-outline',
     description: 'Versão enxuta e acessível para micro e pequenos negócios que precisam de controle sem complexidade.',
-    tag: 'Para pequenos negócios'
+    tag: 'Para pequenos negócios',
+    link: '#comprar'
   },
   {
     id: 6,
     name: 'CIAF Online Web',
     icon: 'mdi-web',
     description: 'Acesso 100% via browser, sem instalação. Gerencie sua empresa de qualquer lugar e dispositivo.',
-    tag: 'Sem instalação'
+    tag: 'Sem instalação',
+    link: 'https://ciafonline.com.br'
   }
 ]
 
@@ -108,14 +114,23 @@ const featuredHighlights = [
             <p class="solution-card__desc">{{ product.description }}</p>
           </div>
 
-          <RouterLink
-            :to="product.id === 1 ? '/solucoes/ciaf-professional' : '#comprar'"
+          <RouterLink v-if="product.link !== 'https://ciafonline.com.br'"
+            :to="product.link"
             class="solution-card__cta"
             :aria-label="`Saiba mais sobre ${product.name}`"
           >
             Saiba mais
             <i class="mdi mdi-arrow-right" aria-hidden="true" />
           </RouterLink>
+          <a
+              v-else
+              :href="product.link"
+              target="_blank"
+              style="color: #3f6993; font-weight: bold; text-decoration: none;"
+          >
+            Saiba mais
+            <i class="mdi mdi-arrow-right" aria-hidden="true" />
+          </a>
         </article>
       </div>
 
@@ -150,7 +165,7 @@ const featuredHighlights = [
       <div class="ciaf_online_right">
         <h2 style="text-align: center">Ciaf Online</h2>
         <h3>Faça seu teste gratuitamente e descubra todos os potenciais do ERP online Ciaf Web</h3>
-        <a class="btn btn--primary">Acesse já</a>
+        <a class="btn btn--primary" href="https://ciafonline.com.br" target="_blank">Acesse já</a>
       </div>
     </div>
   </section>
