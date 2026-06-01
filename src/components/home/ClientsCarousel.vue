@@ -34,7 +34,7 @@ const getLogoUrl = (file) =>
 
 <style lang="scss" scoped>
 .clients {
-  padding: $space-8 0 $space-6;
+  padding: $space-1 0 $space-6;
   background: $color-gray-50;
   overflow: hidden;
 

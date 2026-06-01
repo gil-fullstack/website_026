@@ -10,8 +10,8 @@ import ClientsCarousel from '@/components/home/ClientsCarousel.vue'
 <template>
   <HeroSection />
   <SolutionsSection />
+  <ClientsCarousel />
   <DifferentialsSection />
   <StatsSection />
   <CtaSection />
-  <ClientsCarousel />
 </template>

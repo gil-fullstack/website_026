@@ -179,6 +179,7 @@ onUnmounted(stopTimer)
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  margin-top: -3%;
 
   &::before {
     content: '';
