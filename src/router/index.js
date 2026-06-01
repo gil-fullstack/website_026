@@ -8,6 +8,18 @@ const routes = [
     meta: { title: 'CIAF Sistemas — Soluções ERP e Automação' }
   },
   {
+    path: '/home2',
+    name: 'home2',
+    component: () => import('../views/HomeView2.vue'),
+    meta: { title: 'CIAF Sistemas — Soluções ERP e Automação' }
+  },
+  {
+    path: '/solucoes/ciaf-emissor',
+    name: 'ciaf-emissor',
+    component: () => import('../views/solucoes/CiafEmissorView.vue'),
+    meta: { title: 'CIAF Emissor — Emissão de NF-e e NFC-e para Pequenas Empresas | CIAF Sistemas' }
+  },
+  {
     path: '/solucoes/ciaf-professional',
     name: 'ciaf-professional',
     component: () => import('../views/solucoes/CiafProfessionalView.vue'),

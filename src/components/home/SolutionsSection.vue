@@ -40,7 +40,7 @@ const products = [
     icon: 'mdi-file-document-outline',
     description: 'Emissão ágil de NF-e, NFC-e e demais documentos fiscais com total conformidade tributária.',
     tag: null,
-    link: '/solucoes'
+    link: '/solucoes/ciaf-emissor'
   },
   {
     id: 3,
