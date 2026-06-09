@@ -1,9 +1,12 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import {ref, onMounted, onUnmounted} from 'vue'
+import gif1 from '@/assets/gifs/ciaf.gif'
+import gif2 from '@/assets/gifs/ciaf2.gif'
+import gif3 from '@/assets/gifs/ciaf3.gif'
 
 const slides = [
   {
-    title: 'O sistema preferido<br>dos varejistas de MG<br>para <em>vender mais</em><br>sem perder o controle',
+    title: 'Para <em>vender mais</em><br>sem perder o controle',
     subtitle: 'ERP + NF-e + Estoque em um único sistema. Suporte humano incluído, das 8 às 18h, sem cobrar a mais por isso.',
   },
   {
@@ -25,38 +28,41 @@ function nextSlide() {
   setTimeout(() => {
     currentSlide.value = (currentSlide.value + 1) % slides.length
     visible.value = true
-  }, 400)
+  }, 600)
+}
+
+const gifs = [gif1, gif2, gif3]
+const currentGif = ref(0)
+let gifTimer = null
+
+function nextGif() {
+  currentGif.value = (currentGif.value + 1) % gifs.length
+}
+
+function goToGif(index) {
+  clearInterval(gifTimer)
+  currentGif.value = index
+  gifTimer = setInterval(nextGif, 4000)
 }
 
 onMounted(() => {
   const observer = new IntersectionObserver(
-    entries => entries.forEach(el => {
-      if (el.isIntersecting) el.target.classList.add('hero2__reveal--visible')
-    }),
-    { threshold: 0.1 }
+      entries => entries.forEach(el => {
+        if (el.isIntersecting) el.target.classList.add('hero2__reveal--visible')
+      }),
+      {threshold: 0.1}
   )
   document.querySelectorAll('.hero2__reveal').forEach(el => observer.observe(el))
 
-  timer = setInterval(nextSlide, 5000)
+  timer = setInterval(nextSlide, 7000)
+  gifTimer = setInterval(nextGif, 7000)
 })
 
-onUnmounted(() => clearInterval(timer))
+onUnmounted(() => {
+  clearInterval(timer)
+  clearInterval(gifTimer)
+})
 
-const chartBars = [
-  { h: 55, color: 'blue' },
-  { h: 70, color: 'red' },
-  { h: 45, color: 'blue' },
-  { h: 85, color: 'red' },
-  { h: 60, color: 'blue' },
-  { h: 95, color: 'red' },
-  { h: 72, color: 'blue' },
-]
-
-const tableRows = [
-  { produto: 'Ração Premium 15kg', qtd: 24, status: 'ok', label: 'Emitida' },
-  { produto: 'Tinta Látex 18L',    qtd: 8,  status: 'ok', label: 'Emitida' },
-  { produto: 'Filtro de Óleo',     qtd: 31, status: 'pend', label: 'Pendente' },
-]
 </script>
 
 <template>
@@ -64,9 +70,9 @@ const tableRows = [
 
     <!-- Decorações de fundo -->
     <div class="hero2__bg" aria-hidden="true">
-      <div class="hero2__mesh hero2__mesh--red" />
-      <div class="hero2__mesh hero2__mesh--blue" />
-      <div class="hero2__grid" />
+      <div class="hero2__mesh hero2__mesh--red"/>
+      <div class="hero2__mesh hero2__mesh--blue"/>
+      <div class="hero2__grid"/>
     </div>
 
     <!-- Layout principal -->
@@ -79,7 +85,7 @@ const tableRows = [
         </div>
 
         <div class="hero2__rotator" :class="{ 'hero2__rotator--hidden': !visible }">
-          <h1 class="hero2__title" v-html="slides[currentSlide].title" />
+          <h1 class="hero2__title" v-html="slides[currentSlide].title"/>
           <p class="hero2__subtitle">{{ slides[currentSlide].subtitle }}</p>
         </div>
 
@@ -88,12 +94,12 @@ const tableRows = [
             Ver meu plano ideal &nbsp;→
           </a>
           <a
-            href="https://wa.me/5535984698908"
-            class="hero2__btn hero2__btn--outline"
-            target="_blank"
-            rel="noopener noreferrer"
+              href="https://wa.me/5535984698908"
+              class="hero2__btn hero2__btn--outline"
+              target="_blank"
+              rel="noopener noreferrer"
           >
-            <i class="mdi mdi-whatsapp" aria-hidden="true" />
+            <i class="mdi mdi-whatsapp" aria-hidden="true"/>
             Falar no WhatsApp
           </a>
         </div>
@@ -108,86 +114,87 @@ const tableRows = [
         </div>
       </div>
 
-      <!-- Coluna direita — mockup de tela -->
+      <!-- Coluna direita — carrossel de GIFs -->
       <div class="hero2__screen hero2__reveal" style="transition-delay: .15s" aria-hidden="true">
-        <div class="hero2__screen-wrap">
+        <div class="hero2__gif-carousel">
+          <Transition name="hero2-gif-fade" mode="out-in">
+            <img
+                :key="currentGif"
+                :src="gifs[currentGif]"
+                class="hero2__gif-img"
+                alt=""
+                draggable="false"
+            />
+          </Transition>
+          <div class="hero2__gif-dots">
+            <button
+                v-for="(gif, i) in gifs"
+                :key="gif"
+                class="hero2__gif-dot"
+                :class="{ 'hero2__gif-dot--active': i === currentGif }"
+                @click="goToGif(i)"
+                :aria-label="`Slide ${i + 1}`"
+            />
+          </div>
+        </div>
 
-          <!-- Barra do "navegador" -->
+        <!--
+        <div class="hero2__screen-wrap">
           <div class="hero2__screen-bar">
-            <span class="hero2__dot hero2__dot--red" />
-            <span class="hero2__dot hero2__dot--yellow" />
-            <span class="hero2__dot hero2__dot--green" />
+            <span class="hero2__dot hero2__dot--red"/>
+            <span class="hero2__dot hero2__dot--yellow"/>
+            <span class="hero2__dot hero2__dot--green"/>
             <span class="hero2__screen-url">app.ciaf.com.br/dashboard</span>
           </div>
-
-          <!-- Corpo do dashboard -->
           <div class="hero2__screen-body">
             <div class="hero2__screen-header">
               <span class="hero2__screen-title">Dashboard — Visão Geral</span>
               <span class="hero2__screen-date">Hoje, 28/05/2026</span>
             </div>
-
-            <!-- KPIs -->
             <div class="hero2__kpi-row">
               <div class="hero2__kpi">
                 <div class="hero2__kpi-val">R$24,8k</div>
                 <div class="hero2__kpi-lbl">Vendas hoje</div>
               </div>
-              <div class="hero2__kpi hero2__kpi--blue">
+              <div class="hero2__kpi hero2__kpi&#45;&#45;blue">
                 <div class="hero2__kpi-val">142</div>
                 <div class="hero2__kpi-lbl">Pedidos</div>
               </div>
-              <div class="hero2__kpi hero2__kpi--green">
+              <div class="hero2__kpi hero2__kpi&#45;&#45;green">
                 <div class="hero2__kpi-val">98%</div>
                 <div class="hero2__kpi-lbl">NF-e ok</div>
               </div>
             </div>
-
-            <!-- Gráfico de barras -->
             <div class="hero2__chart">
               <div class="hero2__chart-title">Vendas — últimos 7 dias</div>
               <div class="hero2__chart-bars">
-                <div
-                  v-for="(bar, i) in chartBars"
-                  :key="i"
-                  class="hero2__cbar"
-                  :class="`hero2__cbar--${bar.color}`"
-                  :style="{ height: bar.h + '%' }"
-                />
+                <div v-for="(bar, i) in chartBars" :key="i" class="hero2__cbar"
+                     :class="`hero2__cbar&#45;&#45;${bar.color}`" :style="{ height: bar.h + '%' }"/>
               </div>
             </div>
-
-            <!-- Tabela -->
             <div class="hero2__table">
               <div class="hero2__table-head">
                 <span>Produto</span><span>Qtd</span><span>NF-e</span>
               </div>
-              <div
-                v-for="(row, i) in tableRows"
-                :key="i"
-                class="hero2__table-row"
-              >
+              <div v-for="(row, i) in tableRows" :key="i" class="hero2__table-row">
                 <span class="hero2__tval">{{ row.produto }}</span>
                 <span class="hero2__tval">{{ row.qtd }}</span>
                 <span>
-                  <span class="hero2__tbadge" :class="`hero2__tbadge--${row.status}`">
-                    {{ row.label }}
-                  </span>
+                  <span class="hero2__tbadge" :class="`hero2__tbadge&#45;&#45;${row.status}`">{{ row.label }}</span>
                 </span>
               </div>
             </div>
-
-            <!-- Nota de desenvolvimento -->
             <p class="hero2__screen-note">⚠ Substituir por screenshot real do dashboard CIAF</p>
           </div>
         </div>
+        -->
       </div>
 
     </div>
 
     <!-- Seta de scroll -->
     <a href="#solucoes" class="hero2__scroll" aria-label="Ver soluções">
-      <i class="mdi mdi-chevron-down" aria-hidden="true" />
+      <i class="mdi mdi-chevron-down" aria-hidden="true"/>
     </a>
 
   </section>
@@ -260,9 +267,8 @@ const tableRows = [
 .hero2__grid {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
   background-size: 60px 60px;
 }
 
@@ -424,7 +430,7 @@ const tableRows = [
   }
 }
 
-// ── Screen mockup ─────────────────────────────
+// ── Screen / GIF carousel ─────────────────────
 .hero2__screen {
   display: none;
 
@@ -433,6 +439,64 @@ const tableRows = [
   }
 }
 
+// ── GIF Carousel ──────────────────────────────
+.hero2__gif-carousel {
+  position: relative;
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba($color-white, 0.08);
+  background: #0a1e36;
+}
+
+.hero2__gif-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.hero2__gif-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+.hero2__gif-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background: rgba($color-white, 0.3);
+  transition: background 0.25s ease, transform 0.25s ease;
+
+  &--active {
+    background: $color-white;
+    transform: scale(1.25);
+  }
+
+  &:hover:not(.hero2__gif-dot--active) {
+    background: rgba($color-white, 0.55);
+  }
+}
+
+// Transição fade entre GIFs
+.hero2-gif-fade-enter-active,
+.hero2-gif-fade-leave-active {
+  transition: opacity 0.45s ease;
+}
+
+.hero2-gif-fade-enter-from,
+.hero2-gif-fade-leave-to {
+  opacity: 0;
+}
+
+// ── (deprecated) Screen mockup ────────────────
 .hero2__screen-wrap {
   background: linear-gradient(145deg, #1a3a5c, #0f2540);
   border-radius: $radius-md;
@@ -456,9 +520,17 @@ const tableRows = [
   border-radius: 50%;
   flex-shrink: 0;
 
-  &--red    { background: $color-red; }
-  &--yellow { background: #d97706; }
-  &--green  { background: #15803d; }
+  &--red {
+    background: $color-red;
+  }
+
+  &--yellow {
+    background: #d97706;
+  }
+
+  &--green {
+    background: #15803d;
+  }
 }
 
 .hero2__screen-url {
@@ -508,8 +580,13 @@ const tableRows = [
   padding: 10px 12px;
   border-left: 2px solid $color-red;
 
-  &--blue  { border-left-color: $color-navy-mid; }
-  &--green { border-left-color: #15803d; }
+  &--blue {
+    border-left-color: $color-navy-mid;
+  }
+
+  &--green {
+    border-left-color: #15803d;
+  }
 }
 
 .hero2__kpi-val {
@@ -554,8 +631,13 @@ const tableRows = [
   flex: 1;
   transition: all 0.3s;
 
-  &--red  { background: $color-red; }
-  &--blue { background: rgba($color-navy-mid, 0.7); }
+  &--red {
+    background: $color-red;
+  }
+
+  &--blue {
+    background: rgba($color-navy-mid, 0.7);
+  }
 }
 
 // Tabela
@@ -587,7 +669,9 @@ const tableRows = [
   padding: 7px 12px;
   border-bottom: 1px solid rgba($color-white, 0.03);
 
-  &:last-child { border-bottom: none; }
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 .hero2__tval {
@@ -602,8 +686,15 @@ const tableRows = [
   border-radius: 4px;
   font-weight: 600;
 
-  &--ok   { background: rgba(21, 128, 61, 0.25); color: #4ade80; }
-  &--pend { background: rgba(217, 119, 6, 0.2);  color: #fbbf24; }
+  &--ok {
+    background: rgba(21, 128, 61, 0.25);
+    color: #4ade80;
+  }
+
+  &--pend {
+    background: rgba(217, 119, 6, 0.2);
+    color: #fbbf24;
+  }
 }
 
 .hero2__screen-note {
@@ -627,7 +718,9 @@ const tableRows = [
   text-decoration: none;
   transition: color $transition-base;
 
-  &:hover { color: $color-white; }
+  &:hover {
+    color: $color-white;
+  }
 
   .mdi {
     font-size: 32px;
@@ -635,12 +728,18 @@ const tableRows = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mdi { animation: none; }
+    .mdi {
+      animation: none;
+    }
   }
 }
 
 @keyframes hero2-bounce {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(8px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
 }
 </style>
