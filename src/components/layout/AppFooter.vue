@@ -8,9 +8,9 @@ const columns = [
     links: [
       { label: 'CIAF Professional', href: '/solucoes/ciaf-professional' },
       { label: 'CIAF Emissor', href: '#' },
-      { label: 'CIAF Automotivo', href: '#' },
-      { label: 'Petsystem', href: '#' },
-      { label: 'CIAF Essencial', href: '#' },
+      { label: 'CIAF Automotivo', href: '/solucoes/ciaf-automotivo' },
+      { label: 'Petsystem', href: '/solucoes/petsystem' },
+      { label: 'CIAF Essencial', href: '/solucoes/ciaf-essencial' },
       { label: 'CIAF Online Web', href: '#' },
     ]
   },

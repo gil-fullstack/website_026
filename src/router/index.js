@@ -30,6 +30,36 @@ const routes = [
     name: 'ciaf-professional-detail',
     component: () => import('../views/solucoes/CiafProfessionalDetailView.vue'),
     meta: { title: 'CIAF Professional' }
+  },
+  {
+    path: '/solucoes/ciaf-automotivo',
+    name: 'ciaf-automotivo',
+    component: () => import('../views/solucoes/CiafAutomotivoView.vue'),
+    meta: { title: 'CIAF Automotivo — Gestão para Oficinas e Centros Automotivos | CIAF Sistemas' }
+  },
+  {
+    path: '/solucoes/ciaf-automotivo/:slug',
+    name: 'ciaf-automotivo-detail',
+    component: () => import('../views/solucoes/CiafAutomotivoDetailView.vue'),
+    meta: { title: 'CIAF Automotivo' }
+  },
+  {
+    path: '/solucoes/petsystem',
+    name: 'petsystem',
+    component: () => import('../views/solucoes/PetsystemView.vue'),
+    meta: { title: 'Petsystem — Gestão para Clínicas Veterinárias e Pet Shops | CIAF Sistemas' }
+  },
+  {
+    path: '/solucoes/petsystem/:slug',
+    name: 'petsystem-detail',
+    component: () => import('../views/solucoes/PetsystemDetailView.vue'),
+    meta: { title: 'Petsystem' }
+  },
+  {
+    path: '/solucoes/ciaf-essencial',
+    name: 'ciaf-essencial',
+    component: () => import('../views/solucoes/CiafEssencialView.vue'),
+    meta: { title: 'CIAF Essencial — Gestão Online para Pequenos Negócios | CIAF Sistemas' }
   }
 ]
 

@@ -48,7 +48,7 @@ const products = [
     icon: 'mdi-car-wrench',
     description: 'Gestão completa para oficinas mecânicas e lojas de autopeças: OS, estoque e controle de serviços.',
     tag: null,
-    link: '#comprar'
+    link: '/solucoes/ciaf-automotivo'
   },
   {
     id: 4,
@@ -56,7 +56,7 @@ const products = [
     icon: 'mdi-paw',
     description: 'Sistema especializado para pet shops e clínicas veterinárias com agenda, prontuário e vendas.',
     tag: null,
-    link: '#comprar'
+    link: '/solucoes/petsystem'
   },
   {
     id: 5,
@@ -64,7 +64,7 @@ const products = [
     icon: 'mdi-star-circle-outline',
     description: 'Versão enxuta e acessível para micro e pequenos negócios que precisam de controle sem complexidade.',
     tag: 'Para pequenos negócios',
-    link: '#comprar'
+    link: '/solucoes/ciaf-essencial'
   },
   {
     id: 6,
