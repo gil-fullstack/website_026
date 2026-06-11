@@ -17,17 +17,18 @@ const columns = [
   {
     title: 'Recursos',
     links: [
+      { label: 'Comprar Online', href: '/comprar' },
       { label: 'Downloads', href: '#' },
-      { label: 'Suporte Help Desk', href: '#' },
-      { label: 'Abrir Chamado', href: '#' },
-      { label: 'Base de Conhecimento', href: '#' },
-      { label: 'Área do Cliente', href: '#' },
+      { label: 'Suporte Help Desk', href: '/suporte' },
+      { label: 'Abrir Chamado', href: 'http://tvsistemas.mysuite.com.br/central.php' },
+      { label: 'Base de Conhecimento', href: '/suporte#perguntas-frequentes' },
+      { label: 'Área do Cliente', href: 'https://site.ciaf.com.br/login_cliente' },
     ]
   },
   {
     title: 'Empresa',
     links: [
-      { label: 'Sobre nós', href: '#' },
+      { label: 'Sobre nós', href: '/sobre' },
       { label: 'Notícias', href: '#' },
       { label: 'Política de Privacidade', href: '#' },
       { label: 'Termos de Uso', href: '#' },
@@ -76,7 +77,13 @@ const columns = [
               :to="link.href"
               class="footer__col-link"
             >{{ link.label }}</RouterLink>
-            <a v-else :href="link.href" class="footer__col-link">{{ link.label }}</a>
+            <a
+              v-else
+              :href="link.href"
+              class="footer__col-link"
+              :target="link.href.startsWith('http') ? '_blank' : undefined"
+              :rel="link.href.startsWith('http') ? 'noopener noreferrer' : undefined"
+            >{{ link.label }}</a>
           </li>
         </ul>
       </nav>

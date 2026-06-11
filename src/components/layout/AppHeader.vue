@@ -21,13 +21,13 @@ onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true 
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 
 const navLinks = [
-  { label: 'Soluções', href: '#solucoes' },
-  { label: 'Comprar', href: '#comprar' },
-  { label: 'Downloads', href: '#downloads' },
-  { label: 'Sobre', href: '#sobre' },
+  { label: 'Soluções', to: '/#solucoes' },
+  { label: 'Comprar', to: '/comprar' },
+  { label: 'Downloads', to: '/#downloads' },
+  { label: 'Sobre', to: '/sobre' },
   // { label: 'Notícias', href: '#noticias' },
-  { label: 'Suporte', href: '#suporte' },
-  { label: 'Contato', href: '#contato' },
+  { label: 'Suporte', to: '/suporte' },
+  { label: 'Contato', to: '/#contato' },
 ]
 </script>
 
@@ -47,18 +47,33 @@ const navLinks = [
         aria-label="Navegação principal"
       >
         <ul role="list" class="nav__list">
-          <li v-for="link in navLinks" :key="link.href" class="nav__item">
-            <a :href="link.href" class="nav__link" @click="closeMenu">
+          <li v-for="link in navLinks" :key="link.label" class="nav__item">
+            <RouterLink v-if="link.to" :to="link.to" class="nav__link" @click="closeMenu">
+              {{ link.label }}
+            </RouterLink>
+            <a v-else :href="link.href" class="nav__link" @click="closeMenu">
               {{ link.label }}
             </a>
           </li>
         </ul>
 
         <div class="header__actions">
-          <a href="#area-cliente" class="btn btn--outline" @click="closeMenu">
+          <a
+            href="https://site.ciaf.com.br/login_cliente"
+            class="btn btn--outline"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="closeMenu"
+          >
             Área do Cliente
           </a>
-          <a href="#abrir-chamado" class="btn btn--primary" @click="closeMenu">
+          <a
+            href="http://tvsistemas.mysuite.com.br/central.php"
+            class="btn btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="closeMenu"
+          >
             Abrir Chamado
           </a>
         </div>

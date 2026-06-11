@@ -60,6 +60,24 @@ const routes = [
     name: 'ciaf-essencial',
     component: () => import('../views/solucoes/CiafEssencialView.vue'),
     meta: { title: 'CIAF Essencial — Gestão Online para Pequenos Negócios | CIAF Sistemas' }
+  },
+  {
+    path: '/suporte',
+    name: 'suporte',
+    component: () => import('../views/SuporteView.vue'),
+    meta: { title: 'Suporte — CIAF Sistemas' }
+  },
+  {
+    path: '/sobre',
+    name: 'sobre',
+    component: () => import('../views/SobreView.vue'),
+    meta: { title: 'Sobre a CIAF — Nossa Essência | CIAF Sistemas' }
+  },
+  {
+    path: '/comprar',
+    name: 'comprar',
+    component: () => import('../views/ComprarView.vue'),
+    meta: { title: 'Comprar — Planos e Preços | CIAF Sistemas' }
   }
 ]
 
