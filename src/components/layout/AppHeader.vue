@@ -58,15 +58,13 @@ const navLinks = [
         </ul>
 
         <div class="header__actions">
-          <a
-            href="https://site.ciaf.com.br/login_cliente"
+          <RouterLink
+            to="/login-cliente"
             class="btn btn--outline"
-            target="_blank"
-            rel="noopener noreferrer"
             @click="closeMenu"
           >
             Área do Cliente
-          </a>
+          </RouterLink>
           <a
             href="http://tvsistemas.mysuite.com.br/central.php"
             class="btn btn--primary"

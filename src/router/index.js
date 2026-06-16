@@ -78,6 +78,12 @@ const routes = [
     name: 'comprar',
     component: () => import('../views/ComprarView.vue'),
     meta: { title: 'Comprar — Planos e Preços | CIAF Sistemas' }
+  },
+  {
+    path: '/login-cliente',
+    name: 'login-cliente',
+    component: () => import('../views/LoginClienteView.vue'),
+    meta: { title: 'Área do Cliente — CIAF Sistemas' }
   }
 ]
 
